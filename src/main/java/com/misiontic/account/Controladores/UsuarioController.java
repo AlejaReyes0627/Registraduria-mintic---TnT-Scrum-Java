@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 public class UsuarioController {
 		@Autowired
 		private RepositorioUsuario miRepositorioUsuario;
-		@GetMapping("")
+		@GetMapping
 		public List<Usuario> index(){
 		return this.miRepositorioUsuario.findAll();
 
@@ -29,14 +29,14 @@ public class UsuarioController {
 infoUsuario.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
 			return this.miRepositorioUsuario.save(infoUsuario);
 		}
-		@GetMapping("{id}")
+		@GetMapping("/{id}")
 		public Usuario show(@PathVariable String id){
 			Usuario usuarioActual=this.miRepositorioUsuario
 					.findById(id)
 					.orElse(null);
 			return usuarioActual;
 		}
-		@PutMapping("{id}")
+		@PutMapping("/{id}")
 		public Usuario update(@PathVariable String id,@RequestBody Usuario
 infoUsuario){
 			Usuario usuarioActual=this.miRepositorioUsuario
@@ -54,7 +54,7 @@ usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
 		}
 	
 		@ResponseStatus(HttpStatus.NO_CONTENT)
-		@DeleteMapping("{id}")
+		@DeleteMapping("/{id}")
 		public void delete(@PathVariable String id){
 			Usuario usuarioActual=this.miRepositorioUsuario
 					.findById(id)

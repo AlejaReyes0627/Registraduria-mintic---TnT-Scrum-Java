@@ -17,7 +17,7 @@ public class RolController {
     private RepositorioRol miRepositorioRol;
 
 
-    @GetMapping("")
+    @GetMapping
     public List<Rol> index(){
         return this.miRepositorioRol.findAll();
     }
@@ -27,7 +27,7 @@ public class RolController {
     public Rol create(@RequestBody  Rol infoRol){
         return this.miRepositorioRol.save(infoRol);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Rol show(@PathVariable String id){
         Rol rolActual=this.miRepositorioRol
                         .findById(id)
@@ -47,7 +47,7 @@ public class RolController {
         }
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable String id){
         Rol rolActual=this.miRepositorioRol
                 .findById(id)
