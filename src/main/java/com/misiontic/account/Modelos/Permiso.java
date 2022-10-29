@@ -1,24 +1,22 @@
-package Modelos;
+package com.misiontic.account.Modelos;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-@Data
-@Document()
 
+@Data
+@Document
 public class Permiso {
-	 @Id
-	 private String _id;
-	 private String url;
-	 private String metodo;
+	@Id
+	private String _id;
+	private String url;
+	private String metodo;
 	/**
 	 * @param _id
 	 * @param url
 	 * @param metodo
 	 */
-	public Permiso(String _id, String url, String metodo) {
-		super();
-		this._id = _id;
+	public Permiso( String url, String metodo) {
 		this.url = url;
 		this.metodo = metodo;
 	}

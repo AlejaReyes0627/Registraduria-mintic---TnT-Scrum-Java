@@ -1,10 +1,11 @@
 /**
  * 
  */
-package Repositorios;
+package com.misiontic.account.Repositorios;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import Modelos.Permiso;
+import com.misiontic.account.Modelos.Permiso;
+
 
 /**
  * @author Usuario'Alix
