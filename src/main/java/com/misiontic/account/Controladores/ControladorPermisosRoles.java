@@ -36,7 +36,7 @@ public class ControladorPermisosRoles {
     */
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping("rol/{id_roll}/permiso/{id_permiso")
+	@PostMapping("/rol/{id_roll}/permiso/{id_permiso}")
 	public PermisosRoles create(@PathVariable String id_rol,@PathVariable 
 String id_permiso){
 			PermisosRoles nuevo=new PermisosRoles();
