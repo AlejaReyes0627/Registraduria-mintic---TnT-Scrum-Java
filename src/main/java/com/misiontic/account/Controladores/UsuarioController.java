@@ -1,6 +1,7 @@
 package com.misiontic.account.Controladores;
-
+import com.misiontic.account.Modelos.Rol;
 import com.misiontic.account.Modelos.Usuario;
+import com.misiontic.account.Repositorios.RepositorioRol;
 import com.misiontic.account.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.security.NoSuchAlgorithmException;
 public class UsuarioController {
 		@Autowired
 		private RepositorioUsuario miRepositorioUsuario;
+		@Autowired
+		private RepositorioRol miRepositorioRol;
 		@GetMapping
 		public List<Usuario> index(){
 		return this.miRepositorioUsuario.findAll();
@@ -63,6 +66,32 @@ usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
 				this.miRepositorioUsuario.delete(usuarioActual);
 			}
 		}
+		/**
+		* Relación (1 a n) entre rol y usuario
+		* @param id
+		* @param id_rol
+		* @return
+		*/
+		@PutMapping("{id}/rol/{id_rol}")
+		public Usuario asignarRolUsuario(@PathVariable String id, @PathVariable
+String id_roll) {
+			Usuario 
+		usuarioActual=this.miRepositorioUsuario
+							.findById(id)
+							.orElseThrow(null);
+			Rol
+		rolActual=this.miRepositorioRol
+							.findById(id_roll)
+							.orElseThrow(null);
+		if (usuarioActual!=null && rolActual!=null){
+	        usuarioActual.setRol(rolActual);;
+	        return this.miRepositorioUsuario.save(usuarioActual);
+	    }else{
+	        return null;
+	       }
+			
+		}
+		
 		public String convertirSHA256(String password) {
 			MessageDigest md = null;
 			try {
