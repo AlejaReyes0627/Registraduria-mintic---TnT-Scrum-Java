@@ -1,22 +1,19 @@
 package com.misiontic.account.Modelos;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-//hola
+///alejandra xd
 @Data
 @Document
-@AllArgsConstructor
-@NoArgsConstructor
 public class Rol {
     @Id
     private String _id;
     private String nombre;
+    private String descripcion;
 
-    public Rol(String nombre) {
+    public Rol(String nombre, String descripcion) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
     public String get_id() {
@@ -30,7 +27,12 @@ public class Rol {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
-    
-    
-    
