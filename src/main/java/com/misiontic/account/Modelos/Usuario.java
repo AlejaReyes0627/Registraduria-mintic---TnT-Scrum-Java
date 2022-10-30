@@ -1,16 +1,20 @@
 package com.misiontic.account.Modelos;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 //Se hace el import del DBRef para realizar realxion de uno a muchos//
 import org.springframework.data.mongodb.core.mapping.DBRef; 
 import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document()
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 	@Id
 	private String _id;
-	private String seudonimo;
+	private String pseudonimo;
 	private String correo;
 	private String contrasena;
 	//Se crea un parametro de tip rol con la anotacion DBRef//
@@ -19,7 +23,7 @@ public class Usuario {
 	
 	public Usuario(String seudonimo, String correo, String contrasena) {
 		super();
-		this.seudonimo = seudonimo;
+		this.pseudonimo = seudonimo;
 		this.correo = correo;
 		this.contrasena = contrasena;
 	}
@@ -29,11 +33,11 @@ public class Usuario {
 	}
 
 	public String getSeudonimo() {
-		return seudonimo;
+		return pseudonimo;
 	}
 
 	public void setSeudonimo(String seudonimo) {
-		this.seudonimo = seudonimo;
+		this.pseudonimo = seudonimo;
 	}
 
 	public String getCorreo() {

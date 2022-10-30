@@ -34,7 +34,7 @@ public class RolController {
                         .orElse(null);
         return rolActual;
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public Rol update(@PathVariable String id,@RequestBody  Rol infoRol){
         Rol rolActual=this.miRepositorioRol
                 .findById(id)
