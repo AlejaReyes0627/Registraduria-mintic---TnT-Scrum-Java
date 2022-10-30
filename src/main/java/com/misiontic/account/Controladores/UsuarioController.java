@@ -46,7 +46,7 @@ infoUsuario){
 					.findById(id)
 					.orElse(null);
 		if (usuarioActual!=null){
-			usuarioActual.setSeudonimo(infoUsuario.getSeudonimo());
+			usuarioActual.setPseudonimo(infoUsuario.getPseudonimo());
 			usuarioActual.setCorreo(infoUsuario.getCorreo());
 		
 usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()));

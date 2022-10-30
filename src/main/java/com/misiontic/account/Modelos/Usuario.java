@@ -21,9 +21,9 @@ public class Usuario {
 	@DBRef
 	private Rol rol;
 	
-	public Usuario(String seudonimo, String correo, String contrasena) {
+	public Usuario(String pseudonimo, String correo, String contrasena) {
 		super();
-		this.pseudonimo = seudonimo;
+		this.pseudonimo = pseudonimo;
 		this.correo = correo;
 		this.contrasena = contrasena;
 	}
@@ -32,12 +32,12 @@ public class Usuario {
 		return _id;
 	}
 
-	public String getSeudonimo() {
+	public String getPseudonimo() {
 		return pseudonimo;
 	}
 
-	public void setSeudonimo(String seudonimo) {
-		this.pseudonimo = seudonimo;
+	public void setPseudonimo(String pseudonimo) {
+		this.pseudonimo = pseudonimo;
 	}
 
 	public String getCorreo() {
@@ -55,7 +55,7 @@ public class Usuario {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-//Imp´lementacio de metodos get y set para el atributo Rol//
+//Implementacio de metodos get y set para el atributo Rol//
 	public Rol getRol() {
 		return rol;
 	}
