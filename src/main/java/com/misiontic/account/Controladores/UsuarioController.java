@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.HttpServletResponse;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
@@ -21,15 +24,12 @@ public class UsuarioController {
 		@GetMapping
 		public List<Usuario> index(){
 		return this.miRepositorioUsuario.findAll();
-
 		}
 	
 		@ResponseStatus(HttpStatus.CREATED)
 		@PostMapping
 		public Usuario create(@RequestBody Usuario infoUsuario){
-		
-	
-infoUsuario.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
+		infoUsuario.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
 			return this.miRepositorioUsuario.save(infoUsuario);
 		}
 		@GetMapping("/{id}")
@@ -74,14 +74,14 @@ usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
 		*/
 		@PutMapping("{id}/rol/{id_rol}")
 		public Usuario asignarRolUsuario(@PathVariable String id, @PathVariable
-String id_roll) {
+String id_rol) {
 			Usuario 
 		usuarioActual=this.miRepositorioUsuario
 							.findById(id)
 							.orElseThrow(null);
 			Rol
 		rolActual=this.miRepositorioRol
-							.findById(id_roll)
+							.findById(id_rol)
 							.orElseThrow(null);
 		if (usuarioActual!=null && rolActual!=null){
 	        usuarioActual.setRol(rolActual);;
@@ -91,6 +91,23 @@ String id_roll) {
 	       }
 			
 		}
+		
+		/***Relacion de validacion de usuario y contrasena*/
+
+	@PostMapping("/validar")
+	public Usuario validate(@RequestBody Usuario infoUsuario, 
+						final HttpServletResponse response)	throws IOException {
+		Usuario usuarioActual=this.miRepositorioUsuario.getUserByEmail(infoUsuario.getCorreo());
+		if (usuarioActual!=null && usuarioActual.getContrasena().equals(convertirSHA256(infoUsuario.getContrasena()))) 
+		{
+			usuarioActual.setContrasena("");
+			return usuarioActual;
+		}else{
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+	}
 		
 		public String convertirSHA256(String password) {
 			MessageDigest md = null;
